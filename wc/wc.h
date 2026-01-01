@@ -1,8 +1,7 @@
+#ifndef _WC_H
+#define _WC_H
+
 #include <stdint.h>
-
-#define OPTIONS
-
-#ifdef OPTIONS
 
 #define LINES_OPT_SHORT "-l"
 #define LINES_OPT "--lines"
@@ -23,12 +22,11 @@
 #define VER_OPT_SHORT "-v"
 #define VER_OPT "--version"
 
-#endif
-
 /* Functions */
 uint32_t lines_count(const char* text);
-uint32_t words_count(const char* text);
+uint64_t words_count(const char* text);
 uint64_t bytes_count(const char* text);
 uint64_t characters_count(const char* text);
-uint32_t longest_line_size(const char* text);
+// uint32_t longest_line_size(const char* text);
 
+#endif
