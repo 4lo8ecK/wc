@@ -1,48 +1,20 @@
-CC=gcc
+CC=g++
 FLAGS=-Wall
-MAIN=main.c
-WC=wc/wc.c wc/wc.h
-
-TOOLS=tools/str.c tools/str.h
-
-INCLUDE_TOOLS=-I./tools
-INCLUDE_WC=-I./wc
+MAIN = main.cpp
+WC = wc/wc.cpp wc/wc.hpp
+APPNAME = wc
 
 all: app
 
 app: main.o wc.o
-	$(CC) $(FLAGS) main.o wc.o -o wc
+	$(CC) $(FLAGS) main.o wc.o -o $(APPNAME)
 
 main.o: $(MAIN)
-	$(CC) $(FLAGS) $(INCLUDE_TOOLS) $(INCLUDE_WC) -c $(MAIN)
+	$(CC) $(FLAGS) -c $(MAIN)
 
 wc.o: $(WC)
-	$(CC) $(FLAGS) $(INCLUDE_TOOLS) -c $(WC)
+	$(CC) $(FLAGS) -c $(WC)
 
-str.o: $(TOOLS)
-	$(CC) $(FLAGS) -c $(TOOLS)
-
-
-#
-# TESTS
-#
-test: $(MAIN)
-	$(CC) $(FLAGS) -D TEST $(MAIN) -o test
-
-tstmain.o: $(MAIN)
-	$(CC) $(FLAGS) $(INCLUDE_TOOLS) -D TEST2 -c $(MAIN)
-
-tstmain2.o: $(MAIN)
-	$(CC) $(FLAGS) $(INCLUDE_TOOLS) $(INCLUDE_WC) -D TEST3 -c $(MAIN)
-
-
-test2: tstmain.o str.o 
-	$(CC) $(FLAGS) main.o str.o -o test2
-
-test3: tstmain2.o wc.o str.o
-	$(CC) $(FLAGS) main.o wc.o str.o -o test3
-
-
-clean:
-	rm ./*.o
-	rm ./*.gch
+test1: $(MAIN) wc.o
+	$(CC) $(FLAGS) -c -D TEST_ONE $(MAIN)
+	$(CC) $(FLAGS) main.o wc.o -o test1
