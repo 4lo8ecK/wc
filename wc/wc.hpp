@@ -4,6 +4,11 @@
 #include <cstdint>
 #include <string>
 
+#define APP_NAME "wc"
+
+#define VERSION_MAJOR 1
+#define VERSION_MINOR 0
+
 #define LINES_OPT_SHORT "-l"
 #define LINES_OPT "--lines"
 
